@@ -1,7 +1,10 @@
 import connection from "../config/database.js ";
+import { getAllUser } from '../services/CRUDService.js';
 
-const getHomepage = (req, res) => {
-  return res.render("home.ejs");
+const getHomepage = async (req, res) => {
+  let results = await getAllUser();
+  console.log('««««« results »»»»»', results);
+  return res.render("home.ejs",{listUsers:results});
 };
 
 const getImages = (req, res) => {
@@ -18,13 +21,12 @@ const postCreateUser = async (req, res) => {
     ` INSERT INTO  Users(email,name,city) VALUES (?,?,?)`,
     [email, name, city]
   );
-  console.log('««««« results »»»»»', results);
+  console.log("««««« results »»»»»", results);
   res.send("create user ative");
 
   // const [results, fields] = await connection.query("select * from Users");
   // console.log("««««« results »»»»»", results);
   // res.send("create user ative");
-
 };
 
 const getCreatePage = (req, res) => {
@@ -33,7 +35,7 @@ const getCreatePage = (req, res) => {
 
 export default {
   getHomepage,
-  getImages,
   postCreateUser,
   getCreatePage,
+  getImages,
 };

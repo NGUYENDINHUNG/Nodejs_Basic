@@ -55,15 +55,15 @@
             background-color: #ccc;
         }
 
-        .table-container{
-        padding: 15px 20px;
+        .table-container {
+            padding: 15px 20px;
         }
-        .title{
+
+        .title {
             font-size: 25px;
             font-weight: 600;
             padding-bottom: 10px;
         }
-
     </style>
 </head>
 
@@ -74,31 +74,37 @@
 
     </div>
     <div class="table-container">
-        <div class="title">List Users</div>
-        <table>
-        
-        </div>
-        <tr>
-            <th>Id</th>
-            <th>Email</th>
-            <th>Name</th>
-            <th>City</th>
-        </tr>
-        <tr>
-            <td>Peter</td>
-            <td>Griffin</td>
-            <td>$100</td>
-            <td>$100</td>
-        </tr>
-        <tr>
-            <td>Lois</td>
-            <td>Griffin</td>
-            <td>$150</td>
-            <td>$150</td>
-        </tr>
+        <%= JSON.stringify(listUsers)%>
+            <div class="title">List Users</div>
+            <table>
+
+    </div>
+    <tr>
+        <th>Id</th>
+        <th>Email</th>
+        <th>Name</th>
+        <th>City</th>
+        <th>Actions</th>
+    </tr>
+    <tr>
+        <td>Peter</td>
+        <td>Griffin</td>
+        <td>$100</td>
+        <td>$100</td>
+        <td>
+            <button>edit</button>
+            <button>delete</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Lois</td>
+        <td>Griffin</td>
+        <td>$150</td>
+        <td>$150</td>
+    </tr>
     </table>
     </div>
-    
+
 
 
 </body>
