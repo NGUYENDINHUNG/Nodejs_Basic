@@ -1,14 +1,14 @@
 import connection from "../config/database.js ";
-import { getAllUser } from '../services/CRUDService.js';
+import { getAllUser, getUserById } from "../services/CRUDService.js";
 
 const getHomepage = async (req, res) => {
   let results = await getAllUser();
-  console.log('««««« results »»»»»', results);
-  return res.render("home.ejs",{listUsers:results});
+  console.log("««««« results »»»»»", results);
+  return res.render("home.ejs", { listUsers: results });
 };
 
 const getImages = (req, res) => {
-  res.render("sample.ejs");
+  res.render("sample.ejs",{userEdit:user});// x <- y
 };
 
 const postCreateUser = async (req, res) => {
@@ -33,9 +33,16 @@ const getCreatePage = (req, res) => {
   res.render("createUsers.ejs");
 };
 
+const getUpdatePage = async (req, res) => {
+  const userId = req.params.id;
+  let user = await  getUserById(userId)
+  res.render("edit.ejs",{userEdit:user});
+};
+
 export default {
   getHomepage,
   postCreateUser,
   getCreatePage,
   getImages,
+  getUpdatePage,
 };
