@@ -66,9 +66,9 @@
     </div>
 
     <div class="form">
-        <form action="/update-user " method="POST" >
+        <form action="/delete-user " method="POST" >
             <fieldset>
-                <legend>update a users</legend>
+                <legend>Delete a users</legend>
 
                 <div class="input-group d-none"> 
                     <label>id</label>
@@ -76,22 +76,12 @@
                 </div>
 
                 <div class="input-group">
-                    <label>email</label>
+                    <label>Are you sure to delete this user with email</label>
                     <input type="text" value="<%=userEdit.email%>" name="email">
                 </div>
 
-                <div class="input-group">
-                    <label>name</label>
-                    <input type="text" value="<%=userEdit.name%>" name="name">
-                </div>
-
-                <div class="input-group">
-                    <label>city</label>
-                    <input type="text" value="<%=userEdit.city%>" name="city">
-                </div>
-
                 <div>
-                    <button>save</button>
+                    <button>confirm</button>
                 </div>
 
             </fieldset>

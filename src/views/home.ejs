@@ -98,7 +98,9 @@
             </td>
             <td>
                 <a href="/update/<%=user.id %>">edit</a>
-                <a href= href="/update/<%=user.id %>">delete</a>
+                <form action="/delete-user/<%=user.id %>" method="POST">
+                    <button>delete</button>
+                </form>
             </td>
         </tr>
         <% }); %>

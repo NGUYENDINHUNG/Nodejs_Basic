@@ -3,6 +3,7 @@ import {
   getAllUser,
   getUserById,
   UpdateUserId,
+  deleteUserById,
 } from "../services/CRUDService.js";
 
 const getHomepage = async (req, res) => {
@@ -35,18 +36,31 @@ const getUpdatePage = async (req, res) => {
 };
 
 const postUpdateUser = async (req, res) => {
-  let email = req.body.email;
-  let name = req.body.name;
-  let city = req.body.city;
-  let userId = req.body.userId;
+  let { email, name, city, userId } = req.body;
 
   await UpdateUserId(email, name, city, userId);
-  res.send("update user ative");
+  //res.send("update user ative");
+  res.redirect("/");
 };
+
+const postDeleteUser = async (req, res) => {
+  const userId = req.params.id;
+  let user = await getUserById(userId);
+  res.render("deleteUsers.ejs", { userEdit: user });
+};
+//delete users
+const postHandleRemoveUser = async (req, res) => {
+  const id = req.body.userId;
+  await deleteUserById(id);
+  res.redirect("/");
+};
+
 export default {
   getHomepage,
   postCreateUser,
   getCreatePage,
   getUpdatePage,
   postUpdateUser,
+  postDeleteUser,
+  postHandleRemoveUser,
 };
