@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const dbState = [
-  {
+  { 
     value: 0,
     label: "disconnected",
   },
@@ -27,7 +27,7 @@ const connection = async () => {
   };
   await mongoose.connect(process.env.DB_HOST, options);
   const state = Number(mongoose.connection.readyState);
-  console.log(dbState.find((f) => f.value == state).label, "to db");
+  console.log(dbState.find((f) => f.value === state).label, "to db");
 };
 
 export default connection;
