@@ -3,6 +3,7 @@ import express from "express";
 import "dotenv/config";
 import configViewEngine from "./config/viewEngine.js";
 import webRoutes from "./routes/wep.js";
+import apiRoutes from "./routes/api.js"
 //import mysql from "mysql2/promise";
 import connection from "./config/database.js";
 
@@ -24,6 +25,7 @@ configViewEngine(app);
 
 // route
 app.use("/", webRoutes);
+app.use("/v1/api/", apiRoutes);
 
 
 
