@@ -1,5 +1,6 @@
 import express from "express";
 //import cors from "cors";
+import fileUpload from "express-fileupload";
 import "dotenv/config";
 import configViewEngine from "./config/viewEngine.js";
 import webRoutes from "./routes/wep.js";
@@ -11,7 +12,11 @@ import connection from "./config/database.js";
 //app config.
 const app = express(); //app express
 const port = process.env.PORT || 4000;
+ 
+//config file upload
+app.use(fileUpload() , express.static('public/images'));
 
+       
 //config req.body
 app.use(express.json()); // for json
 app.use(express.urlencoded({ extended: true })); // for form data
