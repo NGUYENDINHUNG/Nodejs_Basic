@@ -12,7 +12,9 @@ const CustomerSchema = new mongoose.Schema(
     image: String,
     description: String,
   },
-  { timestamps: true }
+  {
+    timestamps: true, //create At ,updateAt 
+  }
 );
 CustomerSchema.plugin(mongoose_delete, { overrideMethods: "all" });
 

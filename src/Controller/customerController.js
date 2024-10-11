@@ -5,6 +5,7 @@ import {
   getAllCustomersService,
   UpdateCustomersService,
   DeleteCustomersService,
+  DeleteArrayCustomerService,
 } from "../services/customerSevice.js";
 
 const postCreateCustomer = async (req, res) => {
@@ -87,10 +88,20 @@ const DeleteCustomers = async (req, res) => {
     data: result,
   });
 };
+const DeleteArrayCustomers = async (req, res) => {
+  let ids = req.body.customerId;
+  let result = await DeleteArrayCustomerService(ids);
+
+  return res.status(200).json({
+    EC: 0,
+    data: result,
+  });
+};
 export default {
   postCreateCustomer,
   postCreateArrayCustomer,
   getAllCustomers,
   UpdateCustomers,
   DeleteCustomers,
+  DeleteArrayCustomers,
 };

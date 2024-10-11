@@ -67,3 +67,12 @@ export const DeleteCustomersService = async (id) => {
     return null;
   }
 };
+
+export const DeleteArrayCustomerService = async (arrIds) => {
+  try {
+    let result = await Customer.delete({ _id: { $in: arrIds } });
+    return result;
+  } catch (error) {
+    console.log("««««« error »»»»»", error);
+  }
+};
