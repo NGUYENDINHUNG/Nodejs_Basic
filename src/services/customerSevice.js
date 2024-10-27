@@ -1,5 +1,5 @@
 import Customer from "../models/customer.js";
-
+import aqp from "api-query-params";
 export const createCustomerService = async (customerData) => {
   try {
     let result = await Customer.create({
@@ -27,10 +27,26 @@ export const createArrayCustomersService = async (arr) => {
   }
 };
 
-export const getAllCustomersService = async () => {
+export const getAllCustomersService = async (
+  limit,
+  page,
+  name,
+  queryString
+) => {
   try {
-    const filter = {};
-    let result = await Customer.find(filter);
+    let result = null;
+
+    if (limit && page) {
+      let offset = (page - 1) * limit; // phân  trang
+
+      const { filter } = aqp(queryString);
+      console.log("««««« filter »»»»»", filter);
+      delete filter.page;
+
+      result = await Customer.find(filter).skip(offset).limit(limit).exec();
+    } else {
+      result = await Customer.find({});
+    }
     return result;
   } catch (error) {
     console.log("«««««  »»»»»", error);

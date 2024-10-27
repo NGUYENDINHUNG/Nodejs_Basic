@@ -1,3 +1,4 @@
+import aqp from "api-query-params";
 import { uploadSingleFile } from "../services/fileServices.js";
 import {
   createCustomerService,
@@ -51,11 +52,19 @@ const postCreateArrayCustomer = async (req, res) => {
 };
 
 const getAllCustomers = async (req, res) => {
-  let customers = await getAllCustomersService();
-  if (customers) {
+
+  let limit = req.query.limit;
+  let page = req.query.page;
+  let name = req.query.name;
+  let result = null;
+  if (limit && page) {
+    result = await getAllCustomersService(limit, page, name ,req.query);
+  } else result = await getAllCustomersService();
+
+  if (result) {
     return res.status(200).json({
       EC: 0,
-      data: customers,
+      data: result,
     });
   } else {
     return res.status(500).json({

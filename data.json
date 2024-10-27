@@ -1,0 +1,16 @@
+// {
+//     "type": "EMPTY-PROJECT",
+//     "name": "test project 1",
+//     "startDate": "2024-10-20",
+//     "endDate": "2025-10-20",
+//     "description": "test project nodejs zero",
+//     "customerInfor": {
+//         "name": "hung",
+//         "phone": "0327728357",
+//         "email": "hung@gmail.com"
+//     },
+//     "leader": {
+//         "name": "Leader Name", // Thay thế với tên thực tế
+//         "email": "leader@example.com" // Thay thế với email thực tế
+//     }
+// }
