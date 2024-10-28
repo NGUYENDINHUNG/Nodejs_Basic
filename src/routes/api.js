@@ -2,6 +2,7 @@ import express from "express";
 import apiController from "../Controller/apiController.js";
 import customerController from "../Controller/customerController.js";
 import projectController from "../Controller/projectController.js";
+import TaskController from "../Controller/TaskController.js";
 const routerAPI = express.Router();
 
 const {
@@ -22,7 +23,16 @@ const {
   DeleteArrayCustomers,
 } = customerController;
 
-const { postCreateProject ,getProject } = projectController;
+const {
+  postCreateProject,
+  getProject,
+  UpdateProject,
+  DeleteProject,
+  DeleteUser,
+} = projectController;
+
+const { postTaskProject, getTaskProject, putTaskProject, DeleteTaskProject } =
+  TaskController;
 
 //route_user
 routerAPI.get("/users", getUsersAPI);
@@ -54,8 +64,14 @@ routerAPI.get("/info/:name/:address", (req, res) => {
   });
 });
 //router project
-
 routerAPI.post("/project", postCreateProject);
 routerAPI.get("/project", getProject);
-
+routerAPI.put("/project/update", UpdateProject);
+routerAPI.delete("/project", DeleteProject);
+routerAPI.delete("/project/users", DeleteUser);
+//router Task
+routerAPI.post("/task", postTaskProject);
+routerAPI.get("/task", getTaskProject);
+routerAPI.put("/task/update", putTaskProject);
+routerAPI.delete("/task", DeleteTaskProject);
 export default routerAPI;

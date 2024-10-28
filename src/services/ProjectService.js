@@ -24,9 +24,7 @@ export const getProjectService = async (queryString) => {
   const page = queryString.page;
 
   const { filter, limit, population } = aqp(queryString);
-  console.log("««««« before »»»»»", filter);
   delete filter.page;
-  console.log("««««« after »»»»»", filter);
   let offset = (page - 1) * limit; // phân  trang
   let result = await Project.find(filter)
     .skip(offset)
@@ -36,3 +34,23 @@ export const getProjectService = async (queryString) => {
 
   return result;
 };
+export const UpdateProjectService = async (data) => {
+  let result = await Project.updateOne({ _id: data.id }, { ...data });
+  return result;
+};
+export const RemoveProjectService = async (id) => {
+  let result = await Project.deleteById(id);
+  return result;
+};
+export const RemoveUserProjectService = async (data)=>{
+     if (data.type === "REMOVE-USERS") {
+      let myProject = await Project.findById(data.projectId).exec();
+      for (let i = 0; i < data.userArr.length; i++) {
+       myProject.usersInfor.pull(data.userArr[i])
+      }
+      let newResult = await myProject.save();
+      console.log("««««« myProject »»»»»", myProject);
+      return newResult
+     } 
+     return null;  
+}
