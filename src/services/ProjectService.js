@@ -13,10 +13,15 @@ export const createProjectSevices = async (data) => {
       myProject.usersInfor.push(data.userArr[i]);
     }
     let newResult = await myProject.save();
-    console.log("««««« myProject »»»»»", myProject);
-    //find project by id
-    // const userArr = req.body.userArr.map(id => mongoose.Types.ObjectId(id));
     return newResult;
+  }
+  if (data.type === "ADD-TASK") {
+    let ProjectTask = await Project.findById(data.projectId).exec();
+    for (let i = 0; i < data.taskArr.length; i++) {
+      ProjectTask.tasks.push(data.taskArr[i]);
+    }
+    let results = await ProjectTask.save();
+    return results
   }
   return null;
 };
@@ -42,15 +47,15 @@ export const RemoveProjectService = async (id) => {
   let result = await Project.deleteById(id);
   return result;
 };
-export const RemoveUserProjectService = async (data)=>{
-     if (data.type === "REMOVE-USERS") {
-      let myProject = await Project.findById(data.projectId).exec();
-      for (let i = 0; i < data.userArr.length; i++) {
-       myProject.usersInfor.pull(data.userArr[i])
-      }
-      let newResult = await myProject.save();
-      console.log("««««« myProject »»»»»", myProject);
-      return newResult
-     } 
-     return null;  
-}
+export const RemoveUserProjectService = async (data) => {
+  if (data.type === "REMOVE-USERS") {
+    let myProject = await Project.findById(data.projectId).exec();
+    for (let i = 0; i < data.userArr.length; i++) {
+      myProject.usersInfor.pull(data.userArr[i]);
+    }
+    let newResult = await myProject.save();
+    console.log("««««« myProject »»»»»", myProject);
+    return newResult;
+  }
+  return null;
+};

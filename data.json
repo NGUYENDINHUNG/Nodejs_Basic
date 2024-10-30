@@ -14,3 +14,9 @@
 //         "email": "leader@example.com" // Thay thế với email thực tế
 //     }
 // }
+
+{ 
+    "type": "ADD-TASK", 
+    "projectId": "671f9fd9fc132a82b47f97d8", 
+    "userArr": ["66f42dd7b9235ea57fe7e4d9", "66f16a6fab0a5ff1cf61ab21"] 
+} 

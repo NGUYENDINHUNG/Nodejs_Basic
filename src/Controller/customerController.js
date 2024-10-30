@@ -1,5 +1,7 @@
 import aqp from "api-query-params";
+import Joi from "joi";
 import { uploadSingleFile } from "../services/fileServices.js";
+
 import {
   createCustomerService,
   createArrayCustomersService,
@@ -11,6 +13,22 @@ import {
 
 const postCreateCustomer = async (req, res) => {
   let { name, email, address, phone, description } = req.body;
+
+  // const schema = Joi.object({
+  //   name: Joi.string().alphanum().min(3).max(30).required(),
+  //   address: Joi.string(),
+  //   phone: Joi.string().pattern(new RegExp("^[0-9]{8,11}$")),
+  //   email: Joi.string().email({
+  //     minDomainSegments: 2,
+  //     tlds: { allow: ["com", "net"] },
+  //   }),
+  // });
+  // const { error } = schema.validate(req.body, { abortEarly: false });
+ // console.log("«««««  »»»»»", result);
+
+  // return res.status(200).json({
+  //   msg: error,
+  // });
   let imageUrl = " ";
   //image: String
   if (!req.files || Object.keys(req.files).length === 0) {
@@ -52,13 +70,12 @@ const postCreateArrayCustomer = async (req, res) => {
 };
 
 const getAllCustomers = async (req, res) => {
-
   let limit = req.query.limit;
   let page = req.query.page;
   let name = req.query.name;
   let result = null;
   if (limit && page) {
-    result = await getAllCustomersService(limit, page, name ,req.query);
+    result = await getAllCustomersService(limit, page, name, req.query);
   } else result = await getAllCustomersService();
 
   if (result) {
