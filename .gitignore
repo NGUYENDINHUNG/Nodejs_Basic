@@ -29,6 +29,6 @@ yarn-error.log*
 # vercel
 .vercel
 
-# Enviroment variables
+# Environment variables
 .env
 .env.development
